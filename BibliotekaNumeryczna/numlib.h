@@ -15,6 +15,7 @@
 #include "linear.h"
 #include "integral.h"
 #include "ode.h"
+<<<<<<< HEAD
 
 
 //=================== Wspólne narzêdzia ===================//
@@ -54,3 +55,5 @@ inline bool loadMatrixFile(const std::string& filename, std::vector<std::vector<
 
     return true;
 }
+=======
+>>>>>>> 83ac1400f71d96bf7f36ded71f74e0d61adb8fca
