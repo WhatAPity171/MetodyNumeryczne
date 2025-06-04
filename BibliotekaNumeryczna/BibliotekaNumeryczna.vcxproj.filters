@@ -15,10 +15,25 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="headers\numlib.h">
+    <ClInclude Include="bibliotekaNUM.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="integral.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="nonlinear.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="numlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="interp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="linear.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
