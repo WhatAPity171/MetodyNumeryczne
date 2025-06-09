@@ -1,0 +1,62 @@
+# =============================
+#        USTAWIENIA
+# =============================
+
+CXX = g++
+CXXFLAGS = -std=c++17 -Wall -Iheaders
+LDFLAGS = 
+SRC_DIR = src
+HDR_DIR = headers
+TEST_DIR = tests
+EXAMPLES_DIR = examples
+
+LIB_OBJS = $(patsubst $(SRC_DIR)/%.cpp, build/%.o, $(wildcard $(SRC_DIR)/*.cpp))
+TEST_SRCS = $(wildcard $(TEST_DIR)/test_*.cpp)
+TEST_OBJS = $(patsubst $(TEST_DIR)/%.cpp, build/%.o, $(TEST_SRCS))
+EXAMPLE_OBJ = build/example_linear.o
+
+# =============================
+#        NAZWY CELÓW
+# =============================
+
+TARGET = bin/example
+TEST_BIN = bin/tests
+
+# =============================
+#        REGUŁY BUDOWANIA
+# =============================
+
+all: $(TARGET)
+
+# Kompilacja przykładu z biblioteką
+$(TARGET): $(LIB_OBJS) $(EXAMPLE_OBJ)
+	@mkdir -p bin
+	$(CXX) $(CXXFLAGS) $^ -o $@
+
+# Kompilacja testów z Catch2
+tests: $(LIB_OBJS) $(TEST_OBJS)
+	@mkdir -p bin
+	$(CXX) $(CXXFLAGS) $^ -o $(TEST_BIN)
+
+# Kompilacja .cpp do .o w build/
+build/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+build/%.o: $(TEST_DIR)/%.cpp catch_amalgamated.hpp
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+build/example_linear.o: $(EXAMPLES_DIR)/Example_Linear.cpp
+	@mkdir -p build
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Uruchomienie testów
+run_tests: tests
+	./$(TEST_BIN)
+
+# Czyste budowanie
+clean:
+	rm -rf build bin
+
+.PHONY: all tests run_tests clean

@@ -4,6 +4,8 @@
 #include <functional>
 #include "libnum.h"
 
+constexpr double pi = 3.14159265358979323846;
+
 int main() {
     // === linear: rozwiązanie Ax = b ===
     std::vector<std::vector<double>> A = {
