@@ -9,7 +9,7 @@ namespace integral {
     }
 
     double simpson(std::function<double(double)> f, double a, double b, int n) {
-        if (n % 2 != 0) throw std::invalid_argument("n musi byæ parzyste dla Simpsona");
+        if (n % 2 != 0) throw std::invalid_argument("n musi byï¿½ parzyste dla Simpsona");
         double h = (b - a) / n;
         double sum = f(a) + f(b);
         for (int i = 1; i < n; ++i) {

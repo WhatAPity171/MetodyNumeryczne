@@ -1,62 +1,28 @@
-# =============================
-#        USTAWIENIA
-# =============================
-
+# Kompilator i flagi
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Iheaders
-LDFLAGS = 
-SRC_DIR = src
-HDR_DIR = headers
-TEST_DIR = tests
-EXAMPLES_DIR = examples
+CXXFLAGS = -Wall -Wextra -std=c++17 -O2 -Iheaders
 
-LIB_OBJS = $(patsubst $(SRC_DIR)/%.cpp, build/%.o, $(wildcard $(SRC_DIR)/*.cpp))
-TEST_SRCS = $(wildcard $(TEST_DIR)/test_*.cpp)
-TEST_OBJS = $(patsubst $(TEST_DIR)/%.cpp, build/%.o, $(TEST_SRCS))
-EXAMPLE_OBJ = build/example_linear.o
+# Pliki źródłowe biblioteki
+SRC = src/integral.cpp src/linear.cpp src/nonlinear.cpp src/interp.cpp src/ode.cpp src/numlib.cpp
+OBJECTS = $(SRC:.cpp=.o)
 
-# =============================
-#        NAZWY CELÓW
-# =============================
+# Domyślny cel
+all: tests example_linear
 
-TARGET = bin/example
-TEST_BIN = bin/tests
+# Cel: tests
+tests: test/tests.o $(OBJECTS)
+	$(CXX) $(CXXFLAGS) -o tests test/tests.o $(OBJECTS)
 
-# =============================
-#        REGUŁY BUDOWANIA
-# =============================
+test/tests.o: test/tests.cpp
+	$(CXX) $(CXXFLAGS) -c test/tests.cpp -o test/tests.o
 
-all: $(TARGET)
+# Cel: example_linear
+example_linear: examples/Example_Linear.o $(OBJECTS)
+	$(CXX) $(CXXFLAGS) -o example_linear examples/Example_Linear.o $(OBJECTS)
 
-# Kompilacja przykładu z biblioteką
-$(TARGET): $(LIB_OBJS) $(EXAMPLE_OBJ)
-	@mkdir -p bin
-	$(CXX) $(CXXFLAGS) $^ -o $@
+examples/Example_Linear.o: examples/Example_Linear.cpp
+	$(CXX) $(CXXFLAGS) -c examples/Example_Linear.cpp -o examples/Example_Linear.o
 
-# Kompilacja testów z Catch2
-tests: $(LIB_OBJS) $(TEST_OBJS)
-	@mkdir -p bin
-	$(CXX) $(CXXFLAGS) $^ -o $(TEST_BIN)
-
-# Kompilacja .cpp do .o w build/
-build/%.o: $(SRC_DIR)/%.cpp
-	@mkdir -p build
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-build/%.o: $(TEST_DIR)/%.cpp catch_amalgamated.hpp
-	@mkdir -p build
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-build/example_linear.o: $(EXAMPLES_DIR)/Example_Linear.cpp
-	@mkdir -p build
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-# Uruchomienie testów
-run_tests: tests
-	./$(TEST_BIN)
-
-# Czyste budowanie
+# Czyszczenie
 clean:
-	rm -rf build bin
-
-.PHONY: all tests run_tests clean
+	rm -f $(OBJECTS) test/tests.o examples/Example_Linear.o tests example_linear
