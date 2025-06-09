@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="catch_amalgamated.hpp" />
     <ClInclude Include="integral.h" />
     <ClInclude Include="interp.h" />
     <ClInclude Include="libnum.h" />
@@ -26,6 +27,21 @@
     <ClInclude Include="nonlinear.h" />
     <ClInclude Include="numlib.h" />
     <ClInclude Include="ode.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="integral.cpp" />
+    <ClCompile Include="interp.cpp" />
+    <ClCompile Include="linear.cpp" />
+    <ClCompile Include="nonlinear.cpp" />
+    <ClCompile Include="numlib.cpp" />
+    <ClCompile Include="ode.cpp" />
+    <ClCompile Include="tests_integral.cpp" />
+    <ClCompile Include="tests_interp.cpp" />
+    <ClCompile Include="tests_linear.cpp" />
+    <ClCompile Include="tests_main.cpp" />
+    <ClCompile Include="tests_nonlinear.cpp" />
+    <ClCompile Include="tests_numlib.cpp" />
+    <ClCompile Include="tests_ode.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
