@@ -3,14 +3,23 @@ Projekt realizowany w ramach kursu Metody Numeryczne. Zawiera implementacje popu
 
 Struktura katalogów
 MetodyNumeryczne/
+
 ├── src/ – Pliki źródłowe biblioteki numerycznej (.cpp)
+
 ├── headers/ – Pliki nagłówkowe (.h/.hpp)
+
 ├── test/ – Pliki testowe
+
 │ └── tests.cpp
+
 ├── examples/ – Przykładowe użycia biblioteki
+
 │ └── Example_Linear.cpp
+
 ├── Makefile – Plik make do budowania projektu
+
 └── README.md – Niniejsza dokumentacja
+
 
 Kompilacja i uruchamianie
 Wymagania:
