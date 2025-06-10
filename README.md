@@ -70,7 +70,7 @@ make tests
 
 Przykład użycia
 Przykładowy program:
-examples/Example_Linear.cpp – demonstruje rozwiązywanie układu równań liniowych.
+examples/Example_Linear.cpp – demonstruje użycie różnych funkcji biblioteki
 
 Kompilacja i uruchomienie:
 
